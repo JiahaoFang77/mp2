@@ -1,3 +1,4 @@
+// src/components/GalleryView.tsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -10,17 +11,24 @@ interface MealPreview {
   strMealThumb: string;
 }
 
-const mealCategories = ['Seafood', 'Vegetarian', 'Chicken', 'Dessert', 'Pasta'];
+const mealCategories = ['All', 'Seafood', 'Vegetarian', 'Chicken', 'Dessert', 'Pasta'];
 
 const GalleryView = () => {
   const [meals, setMeals] = useState<MealPreview[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState('Seafood'); // Default category
+  // Set the default category to "All"
+  const [selectedCategory, setSelectedCategory] = useState('All'); 
 
-  // This effect runs when 'selectedCategory' changes
   useEffect(() => {
-    const fetchMealsByCategory = async () => {
+    const fetchMeals = async () => {
+      // 2. Change the API endpoint based on the selected category
+      let url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedCategory}`;
+      if (selectedCategory === 'All') {
+        // Use the search endpoint to get a general list of meals for the "All" category
+        url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+      }
+      
       try {
-        const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedCategory}`);
+        const response = await axios.get(url);
         setMeals(response.data.meals || []);
       } catch (error) {
         console.error("Error fetching gallery data:", error);
@@ -28,14 +36,17 @@ const GalleryView = () => {
       }
     };
     
-    fetchMealsByCategory();
+    fetchMeals();
   }, [selectedCategory]);
 
   const allMealIds = meals.map(meal => meal.idMeal);
 
   return (
     <div className={styles.container}>
-      <h2>Filter by Category</h2>
+      <div className={styles.header}>
+        <h2>Filter by Category</h2>
+        <Link to="/" className={styles.backButton}>&larr; Back to Home</Link>
+      </div>
       <div className={styles.filterControls}>
         {mealCategories.map(category => (
           <button 

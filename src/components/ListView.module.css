@@ -93,3 +93,36 @@
   background-color: #007bff;
   box-shadow: 0 0 0 2px white inset;
 }
+
+.mealInfo {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.mealTitle {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.mealId {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.backButton {
+  text-decoration: none;
+  background-color: #58a6ea;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}

@@ -65,7 +65,10 @@ const ListView = () => {
 
   return (
     <div className={styles.container}>
-      <h2>Search for a Meal</h2>
+      <div className={styles.header}>
+        <h2>Search for a Meal</h2>
+        <Link to="/" className={styles.backButton}>&larr; Back to Home</Link>
+      </div>
       <input 
         type="text"
         placeholder="e.g., Chicken"
@@ -112,8 +115,11 @@ const ListView = () => {
             */}
             <Link to={`/meal/${meal.idMeal}`} state={{ allIds: allMealIds }}>
               <img src={meal.strMealThumb} alt={meal.strMeal} />
-              <span>{meal.strMeal}</span>
-            </Link>
+              <div className={styles.mealInfo}>
+                <span className={styles.mealTitle}>{meal.strMeal}</span>
+                <span className={styles.mealId}>ID: {meal.idMeal}</span>
+              </div>
+            </Link>            
           </li>
         ))}
       </ul>
