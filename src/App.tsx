@@ -7,7 +7,7 @@ import './App.css'; // Make sure you have this to apply some basic styles
 
 function App() {
   return (
-    <BrowserRouter basename="/JiahaoFang77"> 
+    <BrowserRouter basename="/mp2"> 
       <div className="App">
         {/* Simple Navigation Header */}
         <nav className="main-nav">
